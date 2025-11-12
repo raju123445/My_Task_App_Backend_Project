@@ -43,11 +43,18 @@ app.use((req, res, next) => {
 
 // CORS configuration to allow Vercel frontend
 app.use(cors({
-  origin: [
-    'https://my-task-app-backend-project.vercel.app',
-    'https://my-task-app-frontend-project.vercel.app', // If you deploy frontend here
-    'http://localhost:5173', // For local development
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://my-task-app-backend-project.vercel.app',
+      'https://my-task-app-frontend-project.vercel.app',
+      'http://localhost:5173',
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
