@@ -36,16 +36,19 @@ const useAuthStore = create((set) => ({
   login: async (credentials) => {
     try {
       set({ loading: true, error: null });
-  const response = await axios.post(`${apiUrl}/auth/login`, credentials);
-  // Server may return either { user, token } or a flat object with user fields + token
-  const { token, user: userFromResponse, ...rest } = response.data;
-  const user = userFromResponse || rest;
+      const response = await axios.post(`${apiUrl}/auth/login`, credentials);
+      // Server may return either { user, token } or a flat object with user fields + token
+      const { token, user: userFromResponse, ...rest } = response.data;
+      const user = userFromResponse || rest;
 
-  // Store token in localStorage
-  if (token) localStorage.setItem('token', token);
+      // Store token in localStorage
+      if (token) {
+        localStorage.setItem('token', token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
 
-  // Set user in store
-  set({ user, loading: false });
+      // Set user in store
+      set({ user, loading: false });
       toast.success('Login successful!');
       return { success: true };
     } catch (error) {

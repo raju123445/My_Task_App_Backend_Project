@@ -4,6 +4,7 @@ import { apiUrl } from '../utils/constants';
 // Create axios instance
 const api = axios.create({
   baseURL: apiUrl,
+  withCredentials: true,
 });
 
 // Add request interceptor to include token in headers
