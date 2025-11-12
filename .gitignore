@@ -11,6 +11,8 @@ dist-ssr
 *.local
 .env
 details/
+qp.txt
+structure.txt
 
 # Editor directories and files
 .vscode/*
