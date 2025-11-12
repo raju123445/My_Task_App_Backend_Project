@@ -28,7 +28,7 @@ const Login = () => {
       }
       // Will redirect based on user role from server
       navigate('/dashboard', { replace: true });
-      window.location.reload();
+      // window.location.reload();
     }
   };
 
