@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
-const path = require('path');
 
 require('dotenv').config();
 
@@ -49,8 +48,7 @@ app.use(cors({
       'https://my-task-app-backend-project.vercel.app',
       'https://my-task-app-frontend-project.vercel.app',
       'http://localhost:5173',
-      'https://my-task-app-backend-project-9ygdp4tfs.vercel.app/',
-      'my-task-app-backend-project-git-main-sharanabasavarajs-projects.vercel.app',
+      'https://my-task-app-backend-project-9ygdp4tfs.vercel.app/'
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -62,14 +60,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Serve static files from frontend build (if deploying frontend with backend)
-const frontendPath = path.join(__dirname, '..', 'Client', 'dist');
-try {
-  app.use(express.static(frontendPath));
-} catch (error) {
-  console.log('Frontend build not found - running in API-only mode');
-}
-
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
@@ -79,27 +69,6 @@ app.use('/api/tasks', taskRoutes);
 // Home route
 app.get('/', (req, res) => {
   res.send('API is running...');
-});
-
-// Catch-all route for React Router (must be after all API routes)
-// This handles all non-API routes and returns a message for frontend
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'API is running' });
-});
-
-// Catch-all for non-API routes - serve index.html for React Router
-app.get('*', (req, res) => {
-  if (req.path.startsWith('/api')) {
-    return res.status(404).json({ message: 'API route not found' });
-  }
-  // Serve frontend index.html for all non-API routes
-  const indexPath = path.join(__dirname, '..', 'Client', 'dist', 'index.html');
-  res.sendFile(indexPath, (err) => {
-    if (err) {
-      // If frontend not built, send success response
-      res.status(200).json({ message: 'Frontend routing handled - use React Router' });
-    }
-  });
 });
 
 // Error logging middleware
