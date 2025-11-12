@@ -48,6 +48,8 @@ app.use(cors({
       'https://my-task-app-backend-project.vercel.app',
       'https://my-task-app-frontend-project.vercel.app',
       'http://localhost:5173',
+      'https://my-task-app-backend-project-9ygdp4tfs.vercel.app/',
+      'my-task-app-backend-project-git-main-sharanabasavarajs-projects.vercel.app',
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
