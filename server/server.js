@@ -34,17 +34,22 @@ app.use(logger);
 // Performance tracking middleware
 app.use((req, res, next) => {
   const start = Date.now();
-  
   res.on('finish', () => {
     const duration = Date.now() - start;
     logPerformance(`${req.method} ${req.url}`, duration, res.statusCode);
   });
-  
   next();
 });
 
-// Middleware
-app.use(cors());
+// CORS configuration to allow Vercel frontend
+app.use(cors({
+  origin: [
+    'https://my-task-app-backend-project.vercel.app',
+    'https://my-task-app-frontend-project.vercel.app', // If you deploy frontend here
+    'http://localhost:5173', // For local development
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 // API routes
