@@ -1,0 +1,10 @@
+[11/12/2025, 12:46:13] [AUTH] AUTH: OPTIONS /api/auth/profile
+[11/12/2025, 12:46:13] [AUTH] AUTH: GET /api/auth/profile
+[11/12/2025, 12:46:13] [AUTH] AUTH: OPTIONS /api/auth/profile
+[11/12/2025, 12:46:14] [AUTH] AUTH: GET /api/auth/profile
+[11/12/2025, 12:47:29] [AUTH] AUTH: OPTIONS /api/auth/login
+[11/12/2025, 12:47:29] [AUTH] AUTH: POST /api/auth/login
+[11/12/2025, 12:47:30] [AUTH] AUTH: OPTIONS /api/auth/profile
+[11/12/2025, 12:47:30] [AUTH] AUTH: OPTIONS /api/auth/profile
+[11/12/2025, 12:47:30] [AUTH] AUTH: GET /api/auth/profile
+[11/12/2025, 12:47:31] [AUTH] AUTH: GET /api/auth/profile
